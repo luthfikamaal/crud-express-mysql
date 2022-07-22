@@ -7,6 +7,9 @@ cd crud-express-mysql
 npm install
 npm start
 ```
+## Tools
+* [ ] <a href="https://nodejs.org/">Node.js</a>
+* [ ] <a href="https://www.apachefriends.org/">XAMPP</a>
 
 ## Todo
 * [ ] Create a new database in MySQL (```datamahasiswa```)
