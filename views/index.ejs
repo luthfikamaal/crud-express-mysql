@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+  </head>
+  <body>
+    <div class="container-fluid pt-3">
+      <h1 class=""><%= title %></h1>
+      <div class="row">
+        <div class="col-md-8 mb-3">
+          <div class="p-3 border rounded">
+            <table id="example" class="table table-striped" style="width: 100%">
+              <thead>
+                <tr>
+                  <th style="width: 40%">Nama</th>
+                  <th style="width: 40%">Jurusan</th>
+                  <th style="width: 20%">Aksi</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Nama</th>
+                  <th>Jurusan</th>
+                  <th>Aksi</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <% for(let user of users) { %>
+                <tr>
+                  <td><%= user.nama %></td>
+                  <td><%= user.jurusan %></td>
+                  <td class="d-flex">
+                    <button class="btn btn-warning text-white me-2" data-bs-toggle="modal" data-bs-target="#mahasiswa-<%= user.id %>"><i class="bi bi-pen"></i></button>
+                    <form action="/hapus/<%= user.id %>" method="post" class="d-inline">
+                      <button class="btn btn-danger btn-delete" type="submit"><i class="bi bi-trash"></i></button>
+                    </form>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded">
+            <h4 class="mb-3">Tambah Mahasiswa</h4>
+            <form action="/tambah" method="post">
+              <div class="mb-3 row">
+                <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                <div class="col-sm-10">
+                  <input required type="text" class="form-control" id="nama" name="nama" autofocus autocomplete="off" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="jurusan" class="col-sm-2 col-form-label">Jurusan</label>
+                <div class="col-sm-10">
+                  <input required type="text" class="form-control" id="jurusan" name="jurusan" autocomplete="off" />
+                </div>
+              </div>
+              <div class="d-flex">
+                <button type="submit" class="btn btn-primary ms-auto" name="tambah">Tambah</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <% for(let user of users) { %>
+    <div class="modal fade" id="mahasiswa-<%= user.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form action="/edit/<%= user.id %>" method="post">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="nama-edit-<%= user.id %>" class="form-label">Nama</label>
+                <input required type="text" class="form-control" name="nama" id="nama-edit-<%= user.id %>" value="<%= user.nama %>" autocomplete="off" autofocus />
+              </div>
+              <div class="mb-3">
+                <label for="jurusan-edit-<%= user.id %>" class="form-label">Jurusan</label>
+                <input required type="text" class="form-control" name="jurusan" id="jurusan-edit-<%= user.id %>" value="<%= user.jurusan %>" autocomplete="off" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <% } %>
+    <!-- Modal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#example').DataTable();
+        $('.btn-delete').click(function () {
+          return confirm('Yakin hapus?');
+        });
+      });
+    </script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+  </body>
+</html>
