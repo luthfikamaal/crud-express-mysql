@@ -1,12 +1,15 @@
 # CRUD Node.js - Express & MysQL
 
 ## Installation
+To get the Node server running locally:
 ```bash
 git clone https://github.com/luthfikamaal/crud-express-mysql.git
 cd crud-express-mysql
 npm install
 npm start
 ```
+Run ```localhost:8000``` in web browser.
+
 ## Tools
 * <a href="https://git-scm.com/">git</a>
 * <a href="https://nodejs.org/">Node.js</a>
