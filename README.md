@@ -8,7 +8,7 @@ npm install
 npm start
 ```
 ## Tools
-* git
+* <a href="https://git-scm.com/">git</a>
 * <a href="https://nodejs.org/">Node.js</a>
 * <a href="https://www.apachefriends.org/">XAMPP</a>
 
